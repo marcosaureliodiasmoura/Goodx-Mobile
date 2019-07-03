@@ -12,11 +12,15 @@ import { all, takeLatest } from 'redux-saga/effects';
 
 import { signIn, init, signOut } from './auth';
 import { AuthTypes } from '../ducks/auth';
+import { ProjectsTypes } from '../ducks/projects';
+
+import { loadProjects } from './projects';
 
 export default function* rootSaga() {
   yield all([
     init(),
     takeLatest(AuthTypes.SIGN_IN_REQUEST, signIn),
+    takeLatest(ProjectsTypes.LOAD_REQUEST, loadProjects),
     // takeLatest(AuthTypes.SIGN_OUT, signOut),
 
     // takeLatest(ProjectsTypes.GET_REQUEST, getProjects),

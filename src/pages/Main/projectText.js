@@ -1,19 +1,19 @@
-const podcasts = [
+const project = [
   {
     id: 1,
-    title: 'RocketCast',
+    title: 'Matando Leões',
     cover: 'https://s3-sa-east-1.amazonaws.com/gonative/cover1.png',
     tracks: [
       {
         id: '0',
-        title: 'Papercut',
+        title: 'Vamos que Vamos',
         artist: 'Linkin Park',
         url: 'https://s3-sa-east-1.amazonaws.com/gonative/1.mp3',
         artwork: 'https://s3-sa-east-1.amazonaws.com/gonative/cover1.png',
       },
       {
         id: '1',
-        title: 'One Step Closer',
+        title: 'É hora do GO',
         artist: 'Linkin Park',
         url: 'https://s3-sa-east-1.amazonaws.com/gonative/2.mp3',
         artwork: 'https://s3-sa-east-1.amazonaws.com/gonative/cover2.png',
@@ -211,4 +211,4 @@ const podcasts = [
   },
 ];
 
-export default podcasts;
+export default project;
