@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SideMenu from 'react-native-side-menu';
 
 import {
   View, TouchableOpacity, Text, AsyncStorage,
@@ -11,10 +12,10 @@ import { bindActionCreators } from 'redux';
 import ProjectsActions from '../../store/ducks/projects';
 
 import styles, {
-  ProjectList, Podcast, Cover, Info, Title, Count,
+  ProjectList, Project, Cover, Info, Title, Count,
 } from './styles';
 
-import project from './projectText';
+import Menu from '../Menu';
 
 class Main extends Component {
   componentDidMount() {
@@ -23,59 +24,83 @@ class Main extends Component {
     // AsyncStorage.clear();
   }
 
+  state = {
+    leftOpen: false,
+  };
+
+  toggleMenu = (position, isOpen) => {
+    this.setState({ [`${position}Open`]: isOpen });
+  };
+
+  handleProjectPress = (project) => {
+    const { navigation } = this.props;
+
+    navigation.navigate('ProjectDetails', { project });
+  };
+
   render() {
     const { projects } = this.props;
     console.log(this.props);
 
+    const { leftOpen } = this.state;
+
     return (
       <View style={styles.backgroundWrapper}>
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              hitSlop={{
-                top: 5,
-                bottom: 5,
-                left: 10,
-                right: 10,
-              }}
-              onPress={() => {}}
-            >
-              <Icon name="menu" size={24} color="#FFF" />
-            </TouchableOpacity>
-            <Text style={styles.teamTitle}>Goodx</Text>
-            <TouchableOpacity
-              hitSlop={{
-                top: 5,
-                bottom: 5,
-                left: 10,
-                right: 10,
-              }}
-              onPress={() => {}}
-            >
-              <Icon name="account-circle" size={24} color="#FFF" />
-            </TouchableOpacity>
+        <SideMenu
+          isOpen={leftOpen}
+          disableGestures
+          onChange={isOpen => this.toggleMenu('left', isOpen)}
+          openMenuOffset={300}
+          menu={<Menu />}
+        >
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <TouchableOpacity
+                hitSlop={{
+                  top: 5,
+                  bottom: 5,
+                  left: 10,
+                  right: 10,
+                }}
+                onPress={() => this.toggleMenu('left', true)}
+              >
+                <Icon name="menu" size={24} color="#FFF" />
+              </TouchableOpacity>
+              <Text style={styles.teamTitle}>Goodx</Text>
+              <TouchableOpacity
+                hitSlop={{
+                  top: 5,
+                  bottom: 5,
+                  left: 10,
+                  right: 10,
+                }}
+                onPress={() => {}}
+              >
+                <Icon name="account-circle" size={24} color="#FFF" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.content}>
+              <ProjectList
+                // ListHeaderComponent={() => <PageTitle>Lista de Projetos</PageTitle>}
+                data={projects.data || []}
+                keyExtractor={project => String(project.id)}
+                renderItem={({ item: project }) => (
+                  <Project onPress={() => this.handleProjectPress(project)}>
+                    <Cover
+                      source={{ uri: 'https://s3-sa-east-1.amazonaws.com/gonative/cover1.png' }}
+                    />
+                    <Info>
+                      <Title>{project.title}</Title>
+                      <Count>Causa Sociais</Count>
+                      {/* <Count>{`${project.tracks.length} contando`}</Count> */}
+                      <Count>Recife-PE</Count>
+                    </Info>
+                  </Project>
+                )}
+              />
+            </View>
           </View>
-          <View style={styles.content}>
-            <ProjectList
-              // ListHeaderComponent={() => <PageTitle>Lista de Projetos</PageTitle>}
-              data={projects.data || []}
-              keyExtractor={project => String(project.id)}
-              renderItem={({ item: project }) => (
-                <Podcast onPress={() => {}}>
-                  <Cover
-                    source={{ uri: 'https://s3-sa-east-1.amazonaws.com/gonative/cover1.png' }}
-                  />
-                  <Info>
-                    <Title>{project.title}</Title>
-                    <Count>Causa Sociais</Count>
-                    {/* <Count>{`${project.tracks.length} contando`}</Count> */}
-                    <Count>Recife-PE</Count>
-                  </Info>
-                </Podcast>
-              )}
-            />
-          </View>
-        </View>
+        </SideMenu>
       </View>
     );
   }

@@ -59,7 +59,7 @@ export const PageTitle = styled.Text`
 
 // TouchableOpacity: Quando eu passo o mouse em cima
 // attrs: serve para eu trabalhar a estilização do opacity. (Tudo que for Visual)
-export const Podcast = styled.TouchableOpacity.attrs({
+export const Project = styled.TouchableOpacity.attrs({
   activeOpacity: 0.6,
 })`
   flex-direction: row;
