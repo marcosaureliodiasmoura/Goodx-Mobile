@@ -4,6 +4,8 @@
 import { combineReducers } from 'redux';
 import { reducer as auth } from './auth';
 import { reducer as projects } from './projects';
+import projectsDetails from './projectsDetails';
+
 // import users from './users';
 // import donations from './donations';
 // import projectsDetails from './projectsDetails';
@@ -14,6 +16,6 @@ export default combineReducers({
   projects,
   // users,
   // donations,
-  // projectsDetails,
+  projectsDetails,
   // error,
 });

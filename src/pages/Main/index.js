@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SideMenu from 'react-native-side-menu';
-
 import {
   View, TouchableOpacity, Text, AsyncStorage,
 } from 'react-native';
@@ -17,15 +16,26 @@ import styles, {
 
 import Menu from '../Menu';
 
+// console.tron.log('Testando');
 class Main extends Component {
   componentDidMount() {
     const { loadRequest } = this.props;
+    // console.tron.log(this.props);
+
     loadRequest();
     // AsyncStorage.clear();
   }
 
   state = {
     leftOpen: false,
+  };
+
+  signOut = async () => {
+    const { navigation } = this.props;
+
+    await AsyncStorage.clear();
+
+    navigation.navigate('SignIn');
   };
 
   toggleMenu = (position, isOpen) => {
@@ -40,7 +50,7 @@ class Main extends Component {
 
   render() {
     const { projects } = this.props;
-    console.log(this.props);
+    // console.tron.log(this.props); //Consigo ver os dados antes (array vazio) e o depois (array cheio)
 
     const { leftOpen } = this.state;
 
@@ -74,7 +84,7 @@ class Main extends Component {
                   left: 10,
                   right: 10,
                 }}
-                onPress={() => {}}
+                onPress={this.signOut}
               >
                 <Icon name="account-circle" size={24} color="#FFF" />
               </TouchableOpacity>

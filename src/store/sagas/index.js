@@ -16,11 +16,17 @@ import { ProjectsTypes } from '../ducks/projects';
 
 import { loadProjects } from './projects';
 
+import { Types as ProjectsDetailsTypes } from '../ducks/projectsDetails';
+import { getProjectsDetails } from './projectsDetails';
+
+// Faz com que as coisas sejam escutadas primeiro GET_REQUEST
 export default function* rootSaga() {
   yield all([
     init(),
     takeLatest(AuthTypes.SIGN_IN_REQUEST, signIn),
     takeLatest(ProjectsTypes.LOAD_REQUEST, loadProjects),
+    takeLatest(ProjectsDetailsTypes.GET_REQUEST, getProjectsDetails),
+
     // takeLatest(AuthTypes.SIGN_OUT, signOut),
 
     // takeLatest(ProjectsTypes.GET_REQUEST, getProjects),

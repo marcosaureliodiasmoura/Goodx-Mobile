@@ -69,7 +69,7 @@ class SignIn extends Component {
             onChangeText={text => this.setState({ password: text })}
             style={styles.input}
             secureTextEntry
-            autoCapitalize="transparent"
+            autoCapitalize="none"
             autoCorrect={false}
             underlineColorAndroid="transparent"
             returnKeyType="send"
