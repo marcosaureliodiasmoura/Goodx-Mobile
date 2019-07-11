@@ -15,8 +15,6 @@ import {
   ProjectTitle,
   DonateButton,
   DonateButtonText,
-  Episode,
-  Author,
   Title,
 } from './styles';
 
@@ -41,6 +39,13 @@ class Podcast extends Component {
 
     navigation.goBack();
   };
+
+  //Executa de imediato
+  // handleDonatePress = (project) => {
+  //   const { navigation } = this.props;
+
+  //   navigation.navigate('DonateGo', { project });
+  // };
 
   render() {
     const { navigation } = this.props;
@@ -71,7 +76,9 @@ class Podcast extends Component {
               />
 
               <ProjectTitle>{project.title}</ProjectTitle>
-              <DonateButton onPress={() => {}}>
+
+              <DonateButton onPress={() => navigation.navigate('DonateGo', { project })}>
+                {/* <DonateButton onPress={this.handleDonatePress(project)}> */}
                 <DonateButtonText>DOAR</DonateButtonText>
               </DonateButton>
               <Details>

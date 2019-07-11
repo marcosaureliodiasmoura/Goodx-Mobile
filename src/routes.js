@@ -5,6 +5,7 @@ import { createSwitchNavigator, createAppContainer, createStackNavigator } from 
 import SignIn from './pages/SignIn';
 import Main from './pages/Main';
 import ProjectDetails from './pages/ProjectDetails';
+import Donate from './pages/Donate';
 
 export default function createNavigator(isLoggedIn = false) {
   return createAppContainer(
@@ -14,6 +15,7 @@ export default function createNavigator(isLoggedIn = false) {
           {
             Main,
             ProjectDetails,
+            DonateGo: Donate,
           },
           {
             defaultNavigationOptions: {
@@ -21,6 +23,9 @@ export default function createNavigator(isLoggedIn = false) {
             },
           },
         ),
+        // Donate: createStackNavigator({
+        //   Donate,
+        // }),
         SignIn,
       },
       {
