@@ -10,14 +10,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  AsyncStorage,
+  Button,
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AuthActions from '../../store/ducks/auth';
 
-// import { Container } from './styles';
 import styles from './styles';
+
+import api from '../../services/api';
 
 class SignIn extends Component {
   static propTypes = {
@@ -88,10 +91,53 @@ class SignIn extends Component {
   }
 }
 
-// export default SignIn;
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch);
 
 export default connect(
   null,
   mapDispatchToProps,
 )(SignIn);
+
+// state = {
+//   loggedInUser: null,
+//   errorMessage: null,
+// };
+
+// signIn = async () => {
+//   try {
+//     const response = await api.post('/sessions', {
+//       email: 'elven@2.com',
+//       password: '123456',
+//     });
+
+//     const { user, token } = response.data;
+//     console.tron.log(response.data);
+
+//     await AsyncStorage.multiSet([
+//       // Grava várias informações no AsyncStorage
+//       ['@CodeApi:token', token],
+//       ['@CodeApi:user', JSON.stringify(user)],
+//       // Ele vai me retornar o usuário em forma de objeto que tem id,
+//       // nome e etc... pra isso preciso converte-lo em formato de string.
+//     ]);
+
+//     this.setState({ loggedInUser: user });
+//   } catch (response) {
+//     this.setState({ errorMessage: response.data.error });
+//     // Se acontecer algum erro, quero salvar a informação do erro e
+//     // mostrar na tela, que será no estado do meu componente.
+//     // Ou seja um middleware da resposta da nossa api
+//     // Estou retornando o meu error como uma string dentro de uma variavel error ({})
+//   }
+// };
+
+// render() {
+//   return (
+//     <View style={styles.container}>
+//       <View>
+//         <Button onPress={this.signIn} title="Entrar" />
+//       </View>
+//     </View>
+//   );
+
+// export default SignIn;

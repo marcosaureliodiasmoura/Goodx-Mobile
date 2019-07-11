@@ -20,6 +20,7 @@ class App extends Component {
 
   render() {
     const { auth } = this.props;
+    console.tron.log(auth);
 
     if (!auth.authChecked) return null;
 

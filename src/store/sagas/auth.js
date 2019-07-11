@@ -21,7 +21,7 @@ export function* signIn({ email, password }) {
 
     yield call([AsyncStorage, 'setItem'], '@meu-Token', response.data.token);
 
-    // console.log(response.data.token);
+    console.tron.log(response.data.token);
 
     yield put(AuthActions.signInSuccess(response.data.token));
     NavigationService.navigate('Main');

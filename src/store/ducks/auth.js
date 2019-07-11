@@ -23,11 +23,18 @@ export const INITIAL_STATE = Immutable({
   token: null,
   roles: [],
   permissions: [],
+  id: null, // em teste
+  email: null, // em teste
 });
 
 // Reducers
 
-export const success = (state, { token }) => state.merge({ signedIn: true, token });
+export const success = (state, { token, email, id }) => state.merge({
+  signedIn: true,
+  token,
+  email,
+  id,
+});
 
 export const checkSuccess = state => state.merge({ authChecked: true });
 
